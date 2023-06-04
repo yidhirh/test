@@ -1,0 +1,518 @@
+* {
+    padding: 0%;
+    margin: 0%;
+}
+
+body {
+    height: 100%;
+}
+
+.navbar {
+    padding: 20px 7%;
+    display: flex;
+    top: 0%;
+    z-index: 999;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    background-color: orangered;
+}
+
+.navbar .logo img {
+    width: 10%;
+    cursor: pointer;
+}
+
+.navbar .menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar .menu li {
+    list-style: none;
+    display: inline-block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar .menu li img {
+    width: auto;
+    height: 20px;
+}
+
+.navbar .menu li a {
+    display: flex;
+    margin-left: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.navbar .menu li .acct {
+    border-bottom: 2px solid rgb(255, 225, 0);
+}
+
+.navbar .menu li a:hover {
+    border-bottom: 2px solid azure;
+}
+
+.pub {
+    background-image: url('images/back.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: azure;
+    height: 100vh;
+    font-family: sans-serif;
+}
+
+.pub h1 {
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.pub p {
+    margin-top: 40px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.pub button {
+    margin-top: 10px;
+    border: none;
+    padding: 7px 50px;
+    background-color: orangered;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-weight: 900;
+}
+.newproduit {
+    padding: 40px 9%;
+    margin-top: 10%;
+}
+
+.newproduit .promotion {
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    text-align: center;
+    margin-bottom: 1%;
+    background-color: rgb(255, 0, 0);
+}
+
+.newproduit .promotion h1 {
+    font-weight: 900;
+}
+
+.newproduit .produit_promo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.newproduit .produit_promo .carte {
+    border-radius: 0px;
+    background: #f5f5f5;
+    width: 310px;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    transition: transform 0.8s ;
+}
+.newproduit .produit_promo .carte:hover{
+    transform: translateY(10px);
+}
+
+.newproduit .produit_promo .carte img {
+    height: 320px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.newproduit .produit_promo .carte .titre h3 {
+    font-family: sans-serif;
+    font-weight: 900;
+    margin-top: 5%;
+    padding: 1% 5%;
+    text-transform: uppercase;
+}
+
+.newproduit .produit_promo .carte .description p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 5px 20px;
+    color: rgb(0, 0, 0);
+    opacity: 0.8;
+}
+
+.newproduit .produit_promo .carte .box {
+    padding: 3% 5%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.newproduit .produit_promo .carte .boutton {
+    margin-top: 7%;
+}
+
+.newproduit .produit_promo .carte .boutton button:hover {
+    background-color: orange;
+    color: #f5f5f5;
+}
+
+.newproduit .produit_promo .carte .boutton button {
+    padding: 10%;
+    color: orangered;
+    font-family: sans-serif;
+    font-weight: 900;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+
+.newproduit .best .carte .boutton button:hover {
+    background-color: orange;
+    color: #f5f5f5;
+}
+
+.newproduit .best .carte .boutton button {
+    padding: 10%;
+    color: orangered;
+    font-family: sans-serif;
+    font-weight: 900;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.newproduit .produit_promo .carte .box .prix h5 {
+    text-decoration: dashed brown;
+    font-weight: 100;
+    font-size: large;
+    margin-bottom: 3%;
+    font-size: 15px;
+    text-decoration: line-through red;
+}
+
+.newproduit .produit_promo .carte .box .prix h1 {
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 0, 0);
+    font-size: 30px;
+}
+
+.newproduit .best {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.newproduit .best .carte {
+    border-radius: 0px;
+    background: #f5f5f5;
+    width: 310px;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    transition: transform 0.8s ;
+}
+.newproduit .best .carte:hover{
+    transform: translateY(10px);
+}
+.newproduit .best .carte img {
+    height: 310px;
+    width: auto;
+    cursor: pointer;
+}
+
+.newproduit .best .carte .titre h3 {
+    font-family: sans-serif;
+    font-weight: 900;
+    margin-top: 15%;
+    padding: 1% 5%;
+    text-transform: uppercase;
+}
+
+.newproduit .best .carte .description p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 5px 20px;
+    color: rgb(0, 0, 0);
+    opacity: 0.8;
+}
+
+.newproduit .best .carte .box {
+    padding: 3% 5%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.newproduit .best .carte .box .prix h1 {
+    color: rgb(255, 255, 255);
+    background-color: rgb(7, 208, 0);
+    font-size: 30px;
+}
+
+.newproduit .best_vente {
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    text-align: center;
+    margin-bottom: 1%;
+    margin-top: 10%;
+    background-color: rgb(7, 208, 0);
+}
+
+.newproduit .best_vente h1 {
+    font-weight: 900;
+}
+
+.last {
+    padding: 5% 10%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid gainsboro;
+    text-transform: capitalize;
+}
+.last .box .disc{
+    color: rgb(56, 56, 56);
+}
+
+.last .first {
+    display: block;
+}
+
+.last .first img {
+    width: auto;
+    height: 180px;
+    padding: 2% 7%;
+    margin-left: 15%;
+}
+.last .titre {
+    color: orangered;
+}
+
+.last .first .box {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 2% 5%;
+}
+
+.last .first .box .titre {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    padding: 10%;
+}
+
+.last .first .box .titre h1 {
+    font-weight: 900;
+}
+
+.last .first .box .disc p {
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.last .second .box .disc p {
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.last .third .box .disc p {
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.last .second {
+    display: block;
+    margin-left: 5%;
+
+}
+
+.last .second .box {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 2% 5%;
+}
+
+.last .second .box .titre {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    padding: 10%;
+}
+
+.last .second .box .titre h1 {
+    font-weight: 900;
+}
+
+.last .second img {
+    width: auto;
+    height: 180px;
+    padding: 2% 7%;
+}
+
+.last .third {
+    display: block;
+    margin-left: 5%;
+}
+
+.last .third .box {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 2% 5%;
+}
+
+.last .third .box .titre {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    padding: 10%;
+}
+
+.last .third .box .titre h1 {
+    font-weight: 900;
+}
+
+.last .third img {
+    width: auto;
+    padding: 2% 7%;
+    height: 180px;
+    margin-left: 15%;
+}
+
+footer .typepai {
+    background-color: orangered;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2% 10%;
+}
+
+footer .typepai .pay {
+    display: blok;
+    padding: 1%;
+}
+
+footer .typepai .pay h2 {
+    color: aliceblue;
+    font-family: sans-serif;
+    font-weight: 900;
+    margin-bottom: 10%;
+    font-size: medium;
+    text-transform: uppercase;
+}
+
+footer .typepai .pay .box {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer .typepai .pay .box img {
+    width: auto;
+    height: 30px;
+    cursor: pointer;
+}
+
+footer .livraison {
+    display: block;
+}
+
+footer .livraison h3 {
+    color: aliceblue;
+    font-family: sans-serif;
+    font-weight: 900;
+    margin-bottom: 5%;
+    text-transform: uppercase;
+}
+
+footer .livraison .camion {
+    margin-left: 33%;
+}
+
+footer .livraison .camion img {
+    width: auto;
+    cursor: pointer;
+    height: 30px;
+}
+
+.pub button:hover {
+    background-color: rgb(193, 0, 0);
+    transition: all 0.4s ease;
+}
+
+footer .marque {
+    padding: 1% 20%;
+    height: auto;
+    background-color: rgb(255, 68, 0)
+}
+
+footer .marque .mark {
+    display: flex;
+    margin-top: 2%;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+}
+
+footer .marque .mark img {
+    width: 8%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+    cursor: pointer;
+    padding: 1%;
+}
+
+footer .info{
+    background-color: rgba(255, 68, 0, 0.85);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2% 5%;
+}
+footer .info .participents h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-align: center;
+    color: black;
+    font-size: large;
+}
+footer .info .participents ul{
+    display: flex;
+}
+footer .info .participents ul li{
+    list-style: none;
+    margin: 5%;
+    font-family: sans-serif;
+    font-weight: 900;
+    width:auto;
+}
+footer .info .participents ul li a{
+    text-decoration: none;
+    color: #f5f5f5;
+}
+
+footer .reseau {
+    padding: 1% 5%;
+    justify-content: space-between;
+}
+
+footer .reseau img {
+    width: auto;
+    height: 35px;
+    margin-top: 10%;
+}
+footer .reseau img:hover {
+    background-color: rgba(18, 0, 0, 0.498);
+    border-radius: 5px;
+}
+    

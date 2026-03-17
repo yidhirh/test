@@ -8,607 +8,413 @@
   <title>Produits — E-Shop PC Portables</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    /* ── Variables ──────────────────────────────── */
-    :root {
-      --primary:      #0f172a;
-      --accent:       #2563eb;
-      --accent-light: #dbeafe;
-      --surface:      #f8fafc;
-      --card-bg:      #ffffff;
-      --border:       #e2e8f0;
-      --text:         #0f172a;
-      --muted:        #64748b;
-      --radius:       12px;
-      --shadow:       0 4px 24px rgba(0,0,0,0.08);
-    }
-
-    /* ── Reset ──────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--surface); line-height: 1.6; }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
-    h1, h2, h3 { font-family: 'Syne', sans-serif; }
-
-    /* ── Navbar ─────────────────────────────────── */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.92);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .navbar {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.75rem 1.5rem;
-    }
-    .logo img { height: 44px; object-fit: contain; }
-    .menu { display: flex; align-items: center; gap: 0.5rem; }
-    .menu a {
-      padding: 0.5rem 0.9rem;
-      border-radius: 8px;
-      font-size: 0.9rem; font-weight: 500;
-      color: var(--muted);
-      transition: background 0.2s, color 0.2s;
-    }
-    .menu a:hover, .menu a.acct { color: var(--accent); background: var(--accent-light); }
-    .menu img { height: 22px; width: 22px; object-fit: contain; }
-
-    /* ── Layout principal ───────────────────────── */
-    .test {
-      max-width: 1200px; margin: 2rem auto;
-      padding: 0 1.5rem;
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    /* ── Sidebar filtres ────────────────────────── */
-    .cote {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      position: sticky;
-      top: 80px;
-    }
-    .cote > h1 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    .filter-group { margin-bottom: 1.5rem; }
-    .filter-group h3 {
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--text);
-      margin-bottom: 0.75rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .filter-item {
-      display: flex; align-items: center; gap: 0.6rem;
-      margin-bottom: 0.5rem;
-    }
-    .filter-item input[type="checkbox"] {
-      width: 16px; height: 16px;
-      accent-color: var(--accent);
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .filter-item label {
-      font-size: 0.88rem;
-      color: var(--text);
-      cursor: pointer;
-    }
-    .filter-item label:hover { color: var(--accent); }
-
-    .cote .btn-valider {
-      width: 100%;
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.65rem 1rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin-top: 0.5rem;
-    }
-    .cote .btn-valider:hover { background: #1d4ed8; }
-
-    /* ── Grille produits ────────────────────────── */
-    .main {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.25rem;
-    }
-
-    /* ── Carte produit ──────────────────────────── */
-    .pc1 {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex; flex-direction: column;
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-    .pc1:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
-
-    .pc1 > img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      background: #f1f5f9;
-      padding: 1rem;
-      transition: transform 0.3s;
-    }
-    .pc1:hover > img { transform: scale(1.04); }
-
-    .pc1 .box {
-      padding: 1rem;
-      display: flex; flex-direction: column;
-      flex: 1;
-      gap: 0.5rem;
-    }
-    .pc1 .titre h1 {
-      font-size: 0.9rem;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-    .pc1 .disc p {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.6;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .pc1 .prix {
-      display: flex; align-items: center;
-      justify-content: space-between;
-      margin-top: auto;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--border);
-      gap: 0.75rem;
-    }
-    .pc1 .prix h2 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--accent);
-      font-family: 'Syne', sans-serif;
-      white-space: nowrap;
-    }
-    .pc1 .prix button {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.45rem 1rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
-    .pc1 .prix button:hover { background: #1d4ed8; }
-
-    /* ── Footer ─────────────────────────────────── */
-    footer {
-      background: var(--primary);
-      color: #cbd5e1;
-      padding: 3rem 0 1.5rem;
-      margin-top: 4rem;
-    }
-    .typepai {
-      max-width: 1200px; margin: 0 auto;
-      padding: 0 1.5rem 2rem;
-      display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .livraison h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 0.75rem; }
-    .livraison .camion img { height: 44px; filter: brightness(0) invert(1); }
-    .pay h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; }
-    .pay .box { display: flex; gap: 0.75rem; align-items: center; }
-    .pay .box img { height: 28px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.8; }
-    .reseau { display: flex; gap: 0.75rem; }
-    .reseau a img { height: 26px; filter: brightness(0) invert(1); opacity: 0.7; transition: opacity 0.2s; }
-    .reseau a:hover img { opacity: 1; }
-    .marque { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
-    .mark { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: center; }
-    .mark img { height: 30px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.5; transition: opacity 0.2s; }
-    .mark img:hover { opacity: 1; }
-    .info { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
-    .participents h1 { font-size: 0.9rem; color: #94a3b8; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.08em; }
-    .participents ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
-    .participents li a { font-size: 0.85rem; color: #93c5fd; transition: color 0.2s; }
-    .participents li a:hover { color: white; }
-
-    /* ── Responsive ─────────────────────────────── */
-    @media (max-width: 768px) {
-      .test { grid-template-columns: 1fr; }
-      .cote { position: static; }
-    }
-    @media (max-width: 480px) {
-      .main { grid-template-columns: 1fr; }
-      .typepai { flex-direction: column; gap: 1.5rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <!-- ── Navbar ─────────────────────────── -->
+  <!-- ══════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════ -->
   <header>
     <nav class="navbar">
       <div class="logo">
-        <img src="logo.png" alt="Logo du site">
+        <img src="images/logo.png" alt="Logo E-Shop">
       </div>
       <ul class="menu">
         <li><a href="index.html">Accueil</a></li>
         <li><a href="produit.html" class="acct">Produits</a></li>
         <li><a href="#">Conseils</a></li>
         <li>
-          <a href="index.html">
-            <img src="black-male-user-symbol.png" title="Connexion" alt="Connexion">
+          <a href="index.html" class="icon-link" title="Connexion">
+            <img src="images/black-male-user-symbol.png" alt="Mon compte">
           </a>
         </li>
       </ul>
     </nav>
   </header>
 
-  <!-- ── Contenu principal ──────────────── -->
-  <section class="test">
+  <!-- ══════════════════════════════════════
+       LAYOUT : SIDEBAR + GRILLE
+  ══════════════════════════════════════ -->
+  <div class="products-layout">
 
-    <!-- Sidebar filtres -->
-    <aside class="cote">
-      <h1>Filtrer les PC</h1>
+    <!-- ── Sidebar filtres ─────────────── -->
+    <aside class="sidebar">
+      <p class="sidebar-title">Filtrer les PC</p>
 
       <div class="filter-group">
         <h3>Marque</h3>
         <div class="filter-item">
-          <input type="checkbox" id="asus" name="marque" value="asus">
-          <label for="asus">ASUS</label>
+          <input type="checkbox" id="f-asus" name="marque" value="asus">
+          <label for="f-asus">ASUS</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="apple" name="marque" value="apple">
-          <label for="apple">Apple</label>
+          <input type="checkbox" id="f-apple" name="marque" value="apple">
+          <label for="f-apple">Apple</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="lenovo" name="marque" value="lenovo">
-          <label for="lenovo">Lenovo</label>
+          <input type="checkbox" id="f-lenovo" name="marque" value="lenovo">
+          <label for="f-lenovo">Lenovo</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="msi" name="marque" value="msi">
-          <label for="msi">MSI</label>
+          <input type="checkbox" id="f-msi" name="marque" value="msi">
+          <label for="f-msi">MSI</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="hp" name="marque" value="hp">
-          <label for="hp">HP</label>
+          <input type="checkbox" id="f-hp" name="marque" value="hp">
+          <label for="f-hp">HP</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="dell" name="marque" value="dell">
-          <label for="dell">Dell</label>
+          <input type="checkbox" id="f-dell" name="marque" value="dell">
+          <label for="f-dell">Dell</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="samsung" name="marque" value="samsung">
-          <label for="samsung">Samsung</label>
+          <input type="checkbox" id="f-samsung" name="marque" value="samsung">
+          <label for="f-samsung">Samsung</label>
         </div>
       </div>
 
       <div class="filter-group">
         <h3>Prix (DA)</h3>
         <div class="filter-item">
-          <input type="checkbox" id="prix1" name="prix" value="50-100k">
-          <label for="prix1">50 000 – 100 000</label>
+          <input type="checkbox" id="f-p1" name="prix" value="50-100k">
+          <label for="f-p1">50 000 – 100 000</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="prix2" name="prix" value="100-150k">
-          <label for="prix2">100 000 – 150 000</label>
+          <input type="checkbox" id="f-p2" name="prix" value="100-150k">
+          <label for="f-p2">100 000 – 150 000</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="prix3" name="prix" value="150-200k">
-          <label for="prix3">150 000 – 200 000</label>
+          <input type="checkbox" id="f-p3" name="prix" value="150-200k">
+          <label for="f-p3">150 000 – 200 000</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="prix4" name="prix" value="200-500k">
-          <label for="prix4">200 000 – 500 000</label>
+          <input type="checkbox" id="f-p4" name="prix" value="200-500k">
+          <label for="f-p4">200 000 – 500 000</label>
         </div>
       </div>
 
       <div class="filter-group">
         <h3>Processeur</h3>
         <div class="filter-item">
-          <input type="checkbox" id="i3" name="proc" value="i3">
-          <label for="i3">Intel Core i3</label>
+          <input type="checkbox" id="f-i3" name="proc" value="i3">
+          <label for="f-i3">Intel Core i3</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="i5" name="proc" value="i5">
-          <label for="i5">Intel Core i5</label>
+          <input type="checkbox" id="f-i5" name="proc" value="i5">
+          <label for="f-i5">Intel Core i5</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="i7" name="proc" value="i7">
-          <label for="i7">Intel Core i7</label>
+          <input type="checkbox" id="f-i7" name="proc" value="i7">
+          <label for="f-i7">Intel Core i7</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="i9" name="proc" value="i9">
-          <label for="i9">Intel Core i9</label>
+          <input type="checkbox" id="f-i9" name="proc" value="i9">
+          <label for="f-i9">Intel Core i9</label>
         </div>
         <div class="filter-item">
-          <input type="checkbox" id="m1" name="proc" value="m1">
-          <label for="m1">Apple M1 / M2</label>
+          <input type="checkbox" id="f-m1" name="proc" value="m1">
+          <label for="f-m1">Apple M1 / M2</label>
         </div>
       </div>
 
-      <button class="btn-valider">Appliquer les filtres</button>
+      <button class="btn btn-filter">Appliquer</button>
     </aside>
 
-    <!-- Grille produits -->
-    <div class="main">
+    <!-- ── Grille produits ─────────────── -->
+    <div class="products-grid">
 
       <div class="pc1">
-        <img src="lenovo.png" alt="Lenovo ThinkBook 15p G2">
-        <div class="box">
-          <div class="titre"><h1>Lenovo ThinkBook 15p G2 ITH (21B10017FR)</h1></div>
-          <div class="disc"><p>PC portable professionnel avec écran IPS Full HD, puce graphique NVIDIA GTX et composants performants, conçu pour les professionnels de la création.</p></div>
-          <div class="prix">
-            <h2>105 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/lenovo.png" alt="Lenovo ThinkBook 15p G2">
+        </div>
+        <div class="card-body">
+          <h3>Lenovo ThinkBook 15p G2 ITH (21B10017FR)</h3>
+          <p>PC professionnel avec écran IPS Full HD, NVIDIA GTX et composants hautes performances pour la création.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">140 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="APPLE MACBOOK PRO.jpg" alt="Apple MacBook Pro M2 Pro 14">
-        <div class="box">
-          <div class="titre"><h1>Apple MacBook Pro M2 Pro 14" Gris sidéral 16 Go / 512 Go</h1></div>
-          <div class="disc"><p>Doté de la puce M2 Pro, le MacBook Pro offre un sérieux coup de boost à vos activités multiples, avec une autonomie d'une journée entière.</p></div>
-          <div class="prix">
-            <h2>359 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/APPLE MACBOOK PRO.jpg" alt="Apple MacBook Pro M2 Pro 14">
+        </div>
+        <div class="card-body">
+          <h3>Apple MacBook Pro M2 Pro 14" — 16 Go / 512 Go</h3>
+          <p>Puce M2 Pro pour un boost considérable sur toutes vos activités, avec une autonomie d'une journée entière.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">359 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="msi katana.jpg" alt="MSI Katana GF76">
-        <div class="box">
-          <div class="titre"><h1>MSI Katana GF76 12UE-629FR</h1></div>
-          <div class="disc"><p>PC portable Gaming avec processeur Intel 12e génération, puce NVIDIA GeForce RTX, RAM DDR4, SSD PCIe ultra-rapide et écran Full HD 144 Hz.</p></div>
-          <div class="prix">
-            <h2>89 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/msi katana.jpg" alt="MSI Katana GF76">
+        </div>
+        <div class="card-body">
+          <h3>MSI Katana GF76 12UE-629FR</h3>
+          <p>Gaming, Intel 12e Gen, NVIDIA GeForce RTX, DDR4, SSD PCIe ultra-rapide, écran Full HD 144 Hz.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">89 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="mac1.png" alt="Apple MacBook Air M1">
-        <div class="box">
-          <div class="titre"><h1>Apple MacBook Air M1 (2020) Argent 16 Go / 256 Go</h1></div>
-          <div class="disc"><p>Le plus fin et léger des portables Apple, propulsé par la puce M1 pour des performances spectaculaires sur CPU et GPU, avec jusqu'à 18h d'autonomie.</p></div>
-          <div class="prix">
-            <h2>120 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/mac1.png" alt="Apple MacBook Air M1">
+        </div>
+        <div class="card-body">
+          <h3>Apple MacBook Air M1 (2020) — 16 Go / 256 Go</h3>
+          <p>Le plus fin et léger des portables Apple, propulsé par M1 pour des performances spectaculaires et jusqu'à 18h d'autonomie.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">120 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="hp.jpg" alt="HP EliteBook 840 G9">
-        <div class="box">
-          <div class="titre"><h1>HP EliteBook 840 G9 (6T132EA)</h1></div>
-          <div class="disc"><p>Performances, sécurité et durabilité au service de la mobilité professionnelle. Idéal pour les professionnels nomades qui ont besoin d'une machine fiable et légère.</p></div>
-          <div class="prix">
-            <h2>97 400 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/hp.jpg" alt="HP EliteBook 840 G9">
+        </div>
+        <div class="card-body">
+          <h3>HP EliteBook 840 G9 (6T132EA)</h3>
+          <p>Performances, sécurité et durabilité au service de la mobilité professionnelle. Machine fiable et légère.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">97 400 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="dell 7420.jpg" alt="Samsung Galaxy Book2">
-        <div class="box">
-          <div class="titre"><h1>Samsung Galaxy Book2 (NP750XED-KB8FR)</h1></div>
-          <div class="disc"><p>Format compact et léger avec des composants performants pour une utilisation polyvalente au quotidien — mobilité et efficacité combinées.</p></div>
-          <div class="prix">
-            <h2>105 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/dell 7420.jpg" alt="Samsung Galaxy Book2">
+        </div>
+        <div class="card-body">
+          <h3>Samsung Galaxy Book2 (NP750XED-KB8FR)</h3>
+          <p>Format compact et léger avec des composants performants pour une utilisation polyvalente au quotidien.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">105 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="asus.jpg" alt="ASUS ExpertBook B1400">
-        <div class="box">
-          <div class="titre"><h1>ASUS ExpertBook B1 B1400CENT-EK4938R</h1></div>
-          <div class="disc"><p>Efficace et robuste, avec écran à cadre mince et composants performants. Un excellent allié pour le monde de l'entreprise offrant un grand confort de travail.</p></div>
-          <div class="prix">
-            <h2>59 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/asus.jpg" alt="ASUS ExpertBook B1400">
+        </div>
+        <div class="card-body">
+          <h3>ASUS ExpertBook B1 B1400CENT-EK4938R</h3>
+          <p>Robuste, avec écran à cadre mince et composants performants — l'allié idéal en entreprise.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">59 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="asus pro.jpg" alt="ASUS ProArt StudioBook Pro 16">
-        <div class="box">
-          <div class="titre"><h1>ASUS ProArt StudioBook Pro 16 H7600ZM-KV076X</h1></div>
-          <div class="disc"><p>Conçu pour les professionnels de la création, avec un superbe écran IPS Haute Résolution et un DialPad intégré pour concrétiser facilement vos idées.</p></div>
-          <div class="prix">
-            <h2>180 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/asus pro.jpg" alt="ASUS ProArt StudioBook Pro 16">
+        </div>
+        <div class="card-body">
+          <h3>ASUS ProArt StudioBook Pro 16 H7600ZM</h3>
+          <p>Conçu pour les créatifs — écran IPS Haute Résolution et DialPad intégré pour concrétiser vos idées.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">180 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="dell 3551.jpg" alt="Dell Precision 3551">
-        <div class="box">
-          <div class="titre"><h1>Dell Precision 3551-829</h1></div>
-          <div class="disc"><p>Station de travail mobile compacte et performante pour les tâches de CAO 2D/3D, propulsée par un processeur Intel Core i7-10750H.</p></div>
-          <div class="prix">
-            <h2>130 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/dell 3551.jpg" alt="Dell Precision 3551">
+        </div>
+        <div class="card-body">
+          <h3>Dell Precision 3551-829</h3>
+          <p>Station de travail mobile pour la CAO 2D/3D, propulsée par un Intel Core i7-10750H.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">130 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="msi gf63.jpg" alt="MSI GF63 Thin">
-        <div class="box">
-          <div class="titre"><h1>MSI GF63 Thin 11UC-629XFR</h1></div>
-          <div class="disc"><p>Excellentes performances Gaming avec écran 15.6" Full HD 144 Hz, clavier rétroéclairé et système audio de qualité pour un parfait confort de jeu.</p></div>
-          <div class="prix">
-            <h2>75 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/msi gf63.jpg" alt="MSI GF63 Thin">
+        </div>
+        <div class="card-body">
+          <h3>MSI GF63 Thin 11UC-629XFR</h3>
+          <p>Gaming, écran 15.6" Full HD 144 Hz, clavier rétroéclairé, système audio performant.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">75 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="hp 15s.jpg" alt="HP Laptop 15s-eq2081nf">
-        <div class="box">
-          <div class="titre"><h1>HP Laptop 15s-eq2081nf</h1></div>
-          <div class="disc"><p>Ordinateur portable élégant et efficace avec grande autonomie. Idéal pour la bureautique, Internet et les déplacements au quotidien.</p></div>
-          <div class="prix">
-            <h2>58 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/hp 15s.jpg" alt="HP Laptop 15s">
+        </div>
+        <div class="card-body">
+          <h3>HP Laptop 15s-eq2081nf</h3>
+          <p>Élégant, efficace et grande autonomie. Idéal pour la bureautique et les déplacements.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">58 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="lenovo ideapad.jpg" alt="Lenovo IdeaPad Slim 3">
-        <div class="box">
-          <div class="titre"><h1>Lenovo IdeaPad Slim 3 15AMN8 (82XQ000FFR)</h1></div>
-          <div class="disc"><p>Format mince et composants performants pour allier confort et mobilité. Idéal pour les besoins informatiques du quotidien et le divertissement multimédia.</p></div>
-          <div class="prix">
-            <h2>52 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/lenovo ideapad.jpg" alt="Lenovo IdeaPad Slim 3">
+        </div>
+        <div class="card-body">
+          <h3>Lenovo IdeaPad Slim 3 15AMN8</h3>
+          <p>Mince, mobile et performant pour les besoins quotidiens et le multimédia occasionnel.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">52 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="asus p15.jpg" alt="ASUS P1500CMNS">
-        <div class="box">
-          <div class="titre"><h1>ASUS P1500CMNS-EJ737XA</h1></div>
-          <div class="disc"><p>Élégant et performant, parfaitement adapté pour les applications de travail courantes et le divertissement multimédia occasionnel.</p></div>
-          <div class="prix">
-            <h2>55 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/asus p15.jpg" alt="ASUS P1500CMNS">
+        </div>
+        <div class="card-body">
+          <h3>ASUS P1500CMNS-EJ737XA</h3>
+          <p>Élégant et performant, adapté aux applications de travail et au divertissement occasionnel.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">55 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="think.jpg" alt="Lenovo ThinkPad X1 Carbon Gen 10">
-        <div class="box">
-          <div class="titre"><h1>Lenovo ThinkPad X1 Carbon Gen 10 (21CB00BKFR)</h1></div>
-          <div class="disc"><p>Machine légère, performante et design idéale pour les professionnels mobiles qui se déplacent au quotidien avec des exigences élevées.</p></div>
-          <div class="prix">
-            <h2>210 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/think.jpg" alt="Lenovo ThinkPad X1 Carbon Gen 10">
+        </div>
+        <div class="card-body">
+          <h3>Lenovo ThinkPad X1 Carbon Gen 10</h3>
+          <p>Légère, performante et design — idéale pour les professionnels qui se déplacent au quotidien.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">210 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="x1.jpg" alt="Lenovo ThinkPad X1 Yoga Gen 7">
-        <div class="box">
-          <div class="titre"><h1>Lenovo ThinkPad X1 Yoga Gen 7 (21CD005YFR)</h1></div>
-          <div class="disc"><p>Convertible flexible, performant, robuste et léger. L'achat idéal pour les professionnels nomades exigeants qui cherchent polyvalence et mobilité.</p></div>
-          <div class="prix">
-            <h2>230 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/x1.jpg" alt="Lenovo ThinkPad X1 Yoga Gen 7">
+        </div>
+        <div class="card-body">
+          <h3>Lenovo ThinkPad X1 Yoga Gen 7</h3>
+          <p>Convertible flexible — robuste, léger et polyvalent pour les professionnels nomades exigeants.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">230 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="ldlc.jpg" alt="LDLC SPC-N">
-        <div class="box">
-          <div class="titre"><h1>LDLC SPC-N SPC-N-8-240</h1></div>
-          <div class="disc"><p>PC portable simple et polyvalent pour les besoins quotidiens : bureautique, télétravail, Internet et divertissement. Idéal pour étudiants et familles.</p></div>
-          <div class="prix">
-            <h2>48 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/ldlc.jpg" alt="LDLC SPC-N">
+        </div>
+        <div class="card-body">
+          <h3>LDLC SPC-N SPC-N-8-240</h3>
+          <p>Simple et polyvalent pour bureautique, télétravail, Internet et multimédia. Idéal pour étudiants.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">48 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
       <div class="pc1">
-        <img src="aurore.jpg" alt="LDLC Aurore N3U">
-        <div class="box">
-          <div class="titre"><h1>LDLC Aurore N3U-8-S2</h1></div>
-          <div class="disc"><p>Machine simple et abordable pour les tâches courantes : bureautique, navigation Internet et applications de divertissement multimédia.</p></div>
-          <div class="prix">
-            <h2>42 000 DA</h2>
-            <button>Acheter</button>
-          </div>
+        <div class="img-wrap">
+          <img src="images/pc/aurore.jpg" alt="LDLC Aurore N3U">
+        </div>
+        <div class="card-body">
+          <h3>LDLC Aurore N3U-8-S2</h3>
+          <p>Machine abordable pour les tâches courantes — bureautique, navigation Internet et multimédia.</p>
+        </div>
+        <div class="card-footer">
+          <span class="prix-single">42 000 DA</span>
+          <button class="btn btn-sm">Acheter</button>
         </div>
       </div>
 
     </div>
-  </section>
+    <!-- fin .products-grid -->
 
-  <!-- ── Footer ─────────────────────────── -->
+  </div>
+  <!-- fin .products-layout -->
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
   <footer>
-    <div class="typepai">
+    <div class="footer-top">
       <div class="livraison">
         <h3>Livraison express</h3>
-        <div class="camion"><img src="camion.png" alt="Livraison par camion"></div>
+        <img src="images/camion.png" alt="Livraison">
       </div>
       <div class="pay">
         <h2>Réglez avec :</h2>
-        <div class="box">
-          <img src="AlgeriePoste.svg.png" alt="Algérie Poste">
-          <img src="MasterCard_Logo.svg.png" alt="MasterCard">
-          <img src="Old_Visa_Logo.svg.png" alt="Visa">
+        <div class="pay-logos">
+          <img src="images/AlgeriePoste.svg.png" alt="Algérie Poste">
+          <img src="images/MasterCard_Logo.svg.png" alt="MasterCard">
+          <img src="images/Old_Visa_Logo.svg.png" alt="Visa">
         </div>
       </div>
       <div class="reseau">
-        <a href="#" aria-label="Facebook"><img src="icone fb black.png" alt="Facebook"></a>
-        <a href="#" aria-label="WhatsApp"><img src="whattapps.png" alt="WhatsApp"></a>
-        <a href="#" aria-label="Email"><img src="mail.png" alt="Email"></a>
-        <a href="#" aria-label="LinkedIn"><img src="linkd in.png" alt="LinkedIn"></a>
+        <a href="#" aria-label="Facebook"><img src="images/icone fb black.png" alt="Facebook"></a>
+        <a href="#" aria-label="WhatsApp"><img src="images/whattapps.png" alt="WhatsApp"></a>
+        <a href="#" aria-label="Email"><img src="images/mail.png" alt="Email"></a>
+        <a href="#" aria-label="LinkedIn"><img src="images/linkd in.png" alt="LinkedIn"></a>
       </div>
     </div>
 
-    <div class="marque">
+    <div class="footer-brands">
       <div class="mark">
-        <img src="lenovo.png" alt="Lenovo">
-        <img src="appel.png" alt="Apple">
-        <img src="hplogo.jpeg" alt="HP">
-        <img src="MSI-Logo.png" alt="MSI">
-        <img src="dell logo.png" alt="Dell">
-        <img src="logo-asus-png-7169.png" alt="ASUS">
+        <img src="images/lenovo.png" alt="Lenovo">
+        <img src="images/appel.png" alt="Apple">
+        <img src="images/hplogo.jpeg" alt="HP">
+        <img src="images/MSI-Logo.png" alt="MSI">
+        <img src="images/dell logo.png" alt="Dell">
+        <img src="images/logo-asus-png-7169.png" alt="ASUS">
       </div>
     </div>
 
-    <div class="info">
+    <div class="footer-info">
       <div class="participents">
-        <h1>Les participants :</h1>
+        <h4>Les participants</h4>
         <ul>
           <li><a href="mailto:anisgadi01@gmail.com">GADI Anis</a></li>
           <li><a href="mailto:yidhirhammas1650@gmail.com">HAMMAS Yidhir</a></li>
           <li><a href="mailto:">DIDANE Ishak</a></li>
         </ul>
       </div>
+      <span class="copy">© 2024 E-Shop PC — Tous droits réservés</span>
     </div>
   </footer>
 

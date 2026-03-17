@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Profil — E-Shop PC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style2.css"><link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════ -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo E-Shop">
+      </div>
+      <ul class="menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="produit.html">Produits</a></li>
+        <li><a href="#">Conseils</a></li>
+        <li>
+          <a href="profil.html" class="icon-link acct" title="Mon profil">
+            <img src="images/black-male-user-symbol.png" alt="Mon compte">
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       CONTENU PROFIL
+  ══════════════════════════════════════ -->
+  <main class="profil-layout">
+
+    <!-- ── Colonne gauche : carte identité ── -->
+    <aside class="profil-sidebar">
+
+      <div class="avatar-wrap">
+        <div class="avatar-initials" id="avatarInitials">YH</div>
+        <button class="avatar-edit" title="Changer la photo">✎</button>
+      </div>
+
+      <h2 class="profil-name" id="profilName">HAMMAS Yidhir</h2>
+      <p class="profil-email" id="profilEmail">yidhirhammas1650@gmail.com</p>
+
+      <div class="profil-stats">
+        <div class="stat">
+          <span class="stat-val">4</span>
+          <span class="stat-lbl">Commandes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">2</span>
+          <span class="stat-lbl">En cours</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">7</span>
+          <span class="stat-lbl">Favoris</span>
+        </div>
+      </div>
+
+      <nav class="profil-nav">
+        <a href="#infos" class="profil-nav-item active" data-tab="infos">
+          <span class="nav-icon">👤</span> Informations
+        </a>
+        <a href="#commandes" class="profil-nav-item" data-tab="commandes">
+          <span class="nav-icon">📦</span> Mes commandes
+        </a>
+        <a href="#favoris" class="profil-nav-item" data-tab="favoris">
+          <span class="nav-icon">♡</span> Mes favoris
+        </a>
+        <a href="#securite" class="profil-nav-item" data-tab="securite">
+          <span class="nav-icon">🔒</span> Sécurité
+        </a>
+      </nav>
+
+      <button class="btn-deconnexion">Se déconnecter</button>
+    </aside>
+
+    <!-- ── Colonne droite : contenu onglets ── -->
+    <section class="profil-content">
+
+      <!-- Onglet : Informations -->
+      <div class="tab-panel active" id="tab-infos">
+        <div class="panel-header">
+          <h2>Mes informations</h2>
+          <button class="btn btn-sm" id="btnEdit" onclick="toggleEdit()">Modifier</button>
+        </div>
+
+        <form class="profil-form" id="profilForm" onsubmit="saveForm(event)">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prenom">Prénom</label>
+              <input type="text" id="prenom" value="Yidhir" disabled>
+            </div>
+            <div class="form-group">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" value="HAMMAS" disabled>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Adresse email</label>
+              <input type="email" id="email" value="yidhirhammas1650@gmail.com" disabled>
+            </div>
+            <div class="form-group">
+              <label for="tel">Téléphone</label>
+              <input type="tel" id="tel" value="+213 555 123 456" disabled>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full">
+              <label for="adresse">Adresse de livraison</label>
+              <input type="text" id="adresse" value="Bordj Bou Arréridj, Algérie" disabled>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ville">Ville</label>
+              <input type="text" id="ville" value="Bordj Bou Arréridj" disabled>
+            </div>
+            <div class="form-group">
+              <label for="wilaya">Wilaya</label>
+              <input type="text" id="wilaya" value="BBA — W.34" disabled>
+            </div>
+          </div>
+
+          <div class="form-actions" id="formActions" style="display:none;">
+            <button type="submit" class="btn">Enregistrer</button>
+            <button type="button" class="btn-cancel" onclick="cancelEdit()">Annuler</button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Onglet : Commandes -->
+      <div class="tab-panel" id="tab-commandes">
+        <div class="panel-header">
+          <h2>Mes commandes</h2>
+        </div>
+
+        <div class="commandes-list">
+
+          <div class="commande-card">
+            <div class="commande-img">
+              <img src="images/pc/lenovo.png" alt="Lenovo ThinkBook">
+            </div>
+            <div class="commande-info">
+              <h3>Lenovo ThinkBook 15p G2 ITH</h3>
+              <p>Commande #00123 · 12 mars 2024</p>
+            </div>
+            <div class="commande-right">
+              <span class="badge-status livree">Livrée</span>
+              <span class="commande-prix">140 000 DA</span>
+            </div>
+          </div>
+
+          <div class="commande-card">
+            <div class="commande-img">
+              <img src="images/pc/msi katana.jpg" alt="MSI Katana">
+            </div>
+            <div class="commande-info">
+              <h3>MSI Katana GF76 12UE-629FR</h3>
+              <p>Commande #00118 · 28 février 2024</p>
+            </div>
+            <div class="commande-right">
+              <span class="badge-status en-cours">En cours</span>
+              <span class="commande-prix">89 000 DA</span>
+            </div>
+          </div>
+
+          <div class="commande-card">
+            <div class="commande-img">
+              <img src="images/pc/hp.jpg" alt="HP EliteBook">
+            </div>
+            <div class="commande-info">
+              <h3>HP EliteBook 840 G9</h3>
+              <p>Commande #00102 · 5 janvier 2024</p>
+            </div>
+            <div class="commande-right">
+              <span class="badge-status livree">Livrée</span>
+              <span class="commande-prix">97 400 DA</span>
+            </div>
+          </div>
+
+          <div class="commande-card">
+            <div class="commande-img">
+              <img src="images/pc/asus.jpg" alt="ASUS ExpertBook">
+            </div>
+            <div class="commande-info">
+              <h3>ASUS ExpertBook B1400</h3>
+              <p>Commande #00095 · 18 décembre 2023</p>
+            </div>
+            <div class="commande-right">
+              <span class="badge-status annulee">Annulée</span>
+              <span class="commande-prix">59 000 DA</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Onglet : Favoris -->
+      <div class="tab-panel" id="tab-favoris">
+        <div class="panel-header">
+          <h2>Mes favoris</h2>
+        </div>
+
+        <div class="favoris-grid">
+
+          <div class="favori-card">
+            <button class="favori-remove" title="Retirer des favoris">♥</button>
+            <div class="img-wrap">
+              <img src="images/pc/APPLE MACBOOK PRO.jpg" alt="MacBook Pro">
+            </div>
+            <div class="card-body">
+              <h3>Apple MacBook Pro M2 Pro 16"</h3>
+              <p>16 Go RAM · SSD 512 Go · macOS Ventura</p>
+            </div>
+            <div class="card-footer">
+              <span class="prix-single">359 000 DA</span>
+              <a href="produit.html"><button class="btn btn-sm">Voir</button></a>
+            </div>
+          </div>
+
+          <div class="favori-card">
+            <button class="favori-remove" title="Retirer des favoris">♥</button>
+            <div class="img-wrap">
+              <img src="images/pc/think.jpg" alt="ThinkPad X1 Carbon">
+            </div>
+            <div class="card-body">
+              <h3>Lenovo ThinkPad X1 Carbon Gen 10</h3>
+              <p>Intel Core i7 · SSD 512 Go · Windows 11 Pro</p>
+            </div>
+            <div class="card-footer">
+              <span class="prix-single">210 000 DA</span>
+              <a href="produit.html"><button class="btn btn-sm">Voir</button></a>
+            </div>
+          </div>
+
+          <div class="favori-card">
+            <button class="favori-remove" title="Retirer des favoris">♥</button>
+            <div class="img-wrap">
+              <img src="images/pc/dell 3551.jpg" alt="Dell Precision">
+            </div>
+            <div class="card-body">
+              <h3>Dell Precision 3551-829</h3>
+              <p>Intel Core i7 · Station mobile · CAO 2D/3D</p>
+            </div>
+            <div class="card-footer">
+              <span class="prix-single">130 000 DA</span>
+              <a href="produit.html"><button class="btn btn-sm">Voir</button></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Onglet : Sécurité -->
+      <div class="tab-panel" id="tab-securite">
+        <div class="panel-header">
+          <h2>Sécurité</h2>
+        </div>
+
+        <form class="profil-form" onsubmit="return false;">
+
+          <p class="section-sub">Modifier le mot de passe</p>
+
+          <div class="form-row">
+            <div class="form-group full">
+              <label for="mdp-actuel">Mot de passe actuel</label>
+              <input type="password" id="mdp-actuel" placeholder="••••••••">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mdp-new">Nouveau mot de passe</label>
+              <input type="password" id="mdp-new" placeholder="••••••••">
+            </div>
+            <div class="form-group">
+              <label for="mdp-confirm">Confirmer</label>
+              <input type="password" id="mdp-confirm" placeholder="••••••••">
+            </div>
+          </div>
+
+          <div class="form-actions" style="display:flex;">
+            <button type="submit" class="btn">Mettre à jour</button>
+          </div>
+
+          <div class="danger-zone">
+            <p class="section-sub danger">Zone de danger</p>
+            <button type="button" class="btn-danger">Supprimer mon compte</button>
+          </div>
+
+        </form>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer>
+    <div class="footer-top">
+      <div class="livraison">
+        <h3>Livraison express</h3>
+        <img src="images/camion.png" alt="Livraison">
+      </div>
+      <div class="pay">
+        <h2>Réglez avec :</h2>
+        <div class="pay-logos">
+          <img src="images/AlgeriePoste.svg.png" alt="Algérie Poste">
+          <img src="images/MasterCard_Logo.svg.png" alt="MasterCard">
+          <img src="images/Old_Visa_Logo.svg.png" alt="Visa">
+        </div>
+      </div>
+      <div class="reseau">
+        <a href="#" aria-label="Facebook"><img src="images/icone fb black.png" alt="Facebook"></a>
+        <a href="#" aria-label="WhatsApp"><img src="images/whattapps.png" alt="WhatsApp"></a>
+        <a href="#" aria-label="Email"><img src="images/mail.png" alt="Email"></a>
+        <a href="#" aria-label="LinkedIn"><img src="images/linkd in.png" alt="LinkedIn"></a>
+      </div>
+    </div>
+    <div class="footer-brands">
+      <div class="mark">
+        <img src="images/lenovo.png" alt="Lenovo">
+        <img src="images/appel.png" alt="Apple">
+        <img src="images/hplogo.jpeg" alt="HP">
+        <img src="images/MSI-Logo.png" alt="MSI">
+        <img src="images/dell logo.png" alt="Dell">
+        <img src="images/logo-asus-png-7169.png" alt="ASUS">
+      </div>
+    </div>
+    <div class="footer-info">
+      <div class="participents">
+        <h4>Les participants</h4>
+        <ul>
+          <li><a href="mailto:yidhirhammas1650@gmail.com">HAMMAS Yidhir</a></li>
+          <li><a href="mailto:anisgadi01@gmail.com">GADI Anis</a></li>
+          <li><a href="mailto:">DIDANE Ishak</a></li>
+        </ul>
+      </div>
+      <span class="copy">© 2024 E-Shop PC — Tous droits réservés</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ── Navigation par onglets ─────────── */
+    const navItems = document.querySelectorAll('.profil-nav-item');
+    const panels   = document.querySelectorAll('.tab-panel');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', e => {
+        e.preventDefault();
+        const tab = item.dataset.tab;
+        navItems.forEach(n => n.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        item.classList.add('active');
+        document.getElementById('tab-' + tab).classList.add('active');
+      });
+    });
+
+    /* ── Édition du formulaire infos ────── */
+    let editing = false;
+
+    function toggleEdit() {
+      editing = true;
+      document.querySelectorAll('#profilForm input').forEach(i => i.removeAttribute('disabled'));
+      document.getElementById('formActions').style.display = 'flex';
+      document.getElementById('btnEdit').style.display = 'none';
+    }
+
+    function cancelEdit() {
+      editing = false;
+      document.querySelectorAll('#profilForm input').forEach(i => i.setAttribute('disabled', ''));
+      document.getElementById('formActions').style.display = 'none';
+      document.getElementById('btnEdit').style.display = '';
+    }
+
+    function saveForm(e) {
+      e.preventDefault();
+      const prenom = document.getElementById('prenom').value;
+      const nom    = document.getElementById('nom').value;
+      const email  = document.getElementById('email').value;
+      document.getElementById('profilName').textContent  = nom + ' ' + prenom;
+      document.getElementById('profilEmail').textContent = email;
+      const initials = (prenom[0] || '') + (nom[0] || '');
+      document.getElementById('avatarInitials').textContent = initials.toUpperCase();
+      cancelEdit();
+    }
+
+    /* ── Retirer un favori ──────────────── */
+    document.querySelectorAll('.favori-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.favori-card').style.opacity = '0';
+        btn.closest('.favori-card').style.transform = 'scale(0.9)';
+        setTimeout(() => btn.closest('.favori-card').remove(), 300);
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -2,262 +2,467 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style1.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Shop PC Portables</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Variables ──────────────────────────────── */
+    :root {
+      --primary:   #0f172a;
+      --accent:    #2563eb;
+      --accent-light: #dbeafe;
+      --surface:   #f8fafc;
+      --card-bg:   #ffffff;
+      --border:    #e2e8f0;
+      --text:      #0f172a;
+      --muted:     #64748b;
+      --promo-red: #dc2626;
+      --radius:    12px;
+      --shadow:    0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    /* ── Reset ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--surface); line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    h1, h2, h3 { font-family: 'Syne', sans-serif; }
+
+    /* ── Navbar ─────────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+    }
+    .logo img { height: 44px; object-fit: contain; }
+    .menu {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .menu a {
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: background 0.2s, color 0.2s;
+    }
+    .menu a:hover, .menu a.acct { color: var(--accent); background: var(--accent-light); }
+    .menu img { height: 22px; width: 22px; object-fit: contain; }
+
+    /* ── Hero ───────────────────────────────────── */
+    .pub {
+      max-width: 1200px; margin: 4rem auto;
+      padding: 4rem 1.5rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+    }
+    .pub h1 {
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .pub p {
+      font-size: 1.1rem;
+      color: #93c5fd;
+      margin-bottom: 2rem;
+    }
+    .pub button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.85rem 2.4rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: transform 0.15s, background 0.2s;
+    }
+    .pub button:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+    /* ── Section headers ────────────────────────── */
+    .section-title {
+      max-width: 1200px; margin: 3rem auto 1.5rem;
+      padding: 0 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .section-title span.badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--promo-red);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Product grid ───────────────────────────── */
+    .product-grid {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ── Product card ───────────────────────────── */
+    .carte {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .carte:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+
+    .carte .image {
+      background: #f1f5f9;
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      padding: 1rem;
+    }
+    .carte .image img { max-height: 170px; object-fit: contain; transition: transform 0.3s; }
+    .carte:hover .image img { transform: scale(1.05); }
+
+    .carte .titre { padding: 1rem 1rem 0.25rem; }
+    .carte .titre h3 { font-size: 0.95rem; font-weight: 600; line-height: 1.4; }
+
+    .carte .description {
+      padding: 0.25rem 1rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .carte .box {
+      padding: 0.75rem 1rem 1rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+    .prix h5 { font-size: 0.8rem; color: var(--muted); text-decoration: line-through; font-weight: 400; }
+    .prix h1 { font-size: 1.2rem; font-weight: 700; color: var(--accent); font-family: 'Syne', sans-serif; }
+    .prix .single { font-size: 1.2rem; font-weight: 700; color: var(--text); font-family: 'Syne', sans-serif; }
+
+    .boutton button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .boutton button:hover { background: #1d4ed8; }
+
+    /* ── Values section ─────────────────────────── */
+    .last {
+      max-width: 1200px; margin: 2rem auto 4rem;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .last > div {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .last img { width: 40px; height: 40px; object-fit: contain; flex-shrink: 0; margin-top: 4px; }
+    .last .titre h1 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.03em; }
+    .last .disc p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── Footer ─────────────────────────────────── */
+    footer {
+      background: var(--primary);
+      color: #cbd5e1;
+      padding: 3rem 0 1.5rem;
+    }
+    .typepai {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 1.5rem 2rem;
+      display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .livraison h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 0.75rem; }
+    .livraison .camion img { height: 44px; filter: brightness(0) invert(1); }
+
+    .pay h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; }
+    .pay .box { display: flex; gap: 0.75rem; align-items: center; }
+    .pay .box img { height: 28px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.8; }
+
+    .reseau { display: flex; gap: 0.75rem; }
+    .reseau a img { height: 26px; filter: brightness(0) invert(1); opacity: 0.7; transition: opacity 0.2s; }
+    .reseau a:hover img { opacity: 1; }
+
+    .marque {
+      max-width: 1200px; margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .mark {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: center;
+    }
+    .mark img { height: 30px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.5; transition: opacity 0.2s; }
+    .mark img:hover { opacity: 1; }
+
+    .info {
+      max-width: 1200px; margin: 0 auto;
+      padding: 1.5rem 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .participents h1 { font-size: 0.9rem; color: #94a3b8; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .participents ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+    .participents li a { font-size: 0.85rem; color: #93c5fd; transition: color 0.2s; }
+    .participents li a:hover { color: white; }
+
+    /* ── Responsive ─────────────────────────────── */
+    @media (max-width: 640px) {
+      .navbar { padding: 0.6rem 1rem; }
+      .pub { margin: 1.5rem 1rem; padding: 2.5rem 1rem; }
+      .typepai { flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="logo.png" alt="logo du site">
-            </div>
-            <ul class="menu">
-                <li><a href="index.html" class="acct">Acceuil</a></li>
-                <li><a href="produit.html">Produits</a></li>
-                <li><a href="#">conseils</a></li>
-                <li><a href="index.html"><img src="black-male-user-symbol.png" title="login"></a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="pub">
-        <h1>EMPORETZ VOTRE BURAEU PARTOUT AVEC VOUS ET LAISSEZ VOTRE CREATIVITE S'ENVOLER, AVEC NOS PC PORTABLES</h1>
-        <p>Découvrez la gamme des touts nouveaux PC sur notre site E-shop, commancer a explorer :</p>
-        <a href="#exploration"><button>EXPLORER </button></a>
-    </section>
-    <section class="newproduit">
-        <div class="promotion">
-            <h1>NOS PROMOTION :</h1>
+  <!-- ── Navbar ─────────────────────────── -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="logo.png" alt="Logo du site">
+      </div>
+      <ul class="menu">
+        <li><a href="index.html" class="acct">Accueil</a></li>
+        <li><a href="produit.html">Produits</a></li>
+        <li><a href="#">Conseils</a></li>
+        <li>
+          <a href="index.html">
+            <img src="black-male-user-symbol.png" title="Connexion" alt="Connexion">
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ── Hero ───────────────────────────── -->
+  <section class="pub">
+    <h1>Emportez votre bureau partout avec vous et laissez votre créativité s'envoler, avec nos PC portables</h1>
+    <p>Découvrez la gamme des tout nouveaux PC sur notre site E-shop, commencez à explorer :</p>
+    <a href="#exploration"><button>Explorer</button></a>
+  </section>
+
+  <!-- ── Promotions ─────────────────────── -->
+  <div class="section-title">
+    <span>Nos promotions</span>
+    <span class="badge">Promo</span>
+  </div>
+
+  <div class="product-grid" id="exploration">
+
+    <div class="carte">
+      <div class="image"><img src="lenovo.png" alt="Lenovo ThinkBook 15p G2"></div>
+      <div class="titre"><h3>Lenovo ThinkBook 15p G2 ITH (21B10017FR)</h3></div>
+      <div class="description">
+        <p>Professionnel, 15.6", IPS, Full HD, Core i5-11400H, GTX 1650 Max-Q, RAM 16 Go, SSD 512 Go, Windows 11 Pro, 1,90 kg</p>
+      </div>
+      <div class="box">
+        <div class="prix">
+          <h5>157 000 DA</h5>
+          <h1>140 000 DA</h1>
         </div>
-        <div class="produit_promo">
+        <div class="boutton"><a href="#"><button>Détails</button></a></div>
+      </div>
+    </div>
 
-            <div class="carte" id="exploration">
-                <div class="image"><img src="lenovo.png" alt="MSI-pc"></div>
-                <div class="titre">
-                    <h3>Lenovo ThinkBook 15p G2 ITH (21B10017FR)</h3>
-                </div>
-                <div class="description">
-                    <p>Professionnel, 15.6", IPS, Full HD, Core i5-11400H, GTX 1650 Max-Q, RAM 16 Go, SSD 512 Go,
-                        Windows 11 Pro, 1,90 kg</p>
-                </div>
-                <div class="box">
-                    <div class="prix">
-                        <h5>157000.00 DA</h5>
-                        <h1>140000.00 DA</h1>
-                    </div>
-                    <div class="boutton"><a href="#"><button>Details</button></a></div>
-
-                </div>
-            </div>
-
-
-            <div class="carte" id="exploration">
-                <div class="image"><img src="asus.jpg" alt="MSI-pc"></div>
-                <div class="titre">
-                    <h3>ASUS ExpertBook B1 B1400CENT-EK4938R</h3>
-                </div>
-                <div class="description">
-                    <p>Professionnel, 14", IPS, Full HD, Core i5-1135G7, RAM 16 Go, SSD 256 Go, Windows 10 Pro, 1,45 kg
-                    </p>
-                </div>
-                <div class="box">
-                    <div class="prix">
-                        <h5>67000.00 DA</h5>
-                        <h1>59000.00 DA</h1>
-                    </div>
-                    <div class="boutton"><a href="#"><button>Details</button></a></div>
-
-                </div>
-            </div>
-
-
-            <div class="carte" id="exploration">
-                <div class="image"><img src="APPLE MACBOOK PRO.jpg" alt="MSI-pc"></div>
-                <div class="titre">
-                    <h3>Apple MacBook Pro M2 Pro 16" 16Go/512 Go</h3>
-                </div>
-                <div class="description">
-                    <p>Multimédia, 16", Mini LED, 16:10, Apple M2 Pro (GPU 19 coeurs), RAM 16 Go, SSD 512 Go, Mac OS
-                        Ventura, 2,15 kg</p>
-                </div>
-                <div class="box">
-                    <div class="prix">
-                        <h5>367000.00 DA</h5>
-                        <h1>359000.00 DA</h1>
-                    </div>
-                    <div class="boutton"><a href="#"><button>Details</button></a></div>
-
-                </div>
-            </div>
-
+    <div class="carte">
+      <div class="image"><img src="asus.jpg" alt="ASUS ExpertBook B1400"></div>
+      <div class="titre"><h3>ASUS ExpertBook B1 B1400CENT-EK4938R</h3></div>
+      <div class="description">
+        <p>Professionnel, 14", IPS, Full HD, Core i5-1135G7, RAM 16 Go, SSD 256 Go, Windows 10 Pro, 1,45 kg</p>
+      </div>
+      <div class="box">
+        <div class="prix">
+          <h5>67 000 DA</h5>
+          <h1>59 000 DA</h1>
         </div>
-        <div class="best_vente">
-            <h1>NOS MEILLEUR VENTES :</h1>
+        <div class="boutton"><a href="#"><button>Détails</button></a></div>
+      </div>
+    </div>
+
+    <div class="carte">
+      <div class="image"><img src="APPLE MACBOOK PRO.jpg" alt="Apple MacBook Pro M2 Pro 16"></div>
+      <div class="titre"><h3>Apple MacBook Pro M2 Pro 16" 16 Go / 512 Go</h3></div>
+      <div class="description">
+        <p>Multimédia, 16", Mini LED, 16:10, Apple M2 Pro (GPU 19 cœurs), RAM 16 Go, SSD 512 Go, macOS Ventura, 2,15 kg</p>
+      </div>
+      <div class="box">
+        <div class="prix">
+          <h5>367 000 DA</h5>
+          <h1>359 000 DA</h1>
         </div>
-        <div class="best">
+        <div class="boutton"><a href="#"><button>Détails</button></a></div>
+      </div>
+    </div>
 
-            <div class="carte" id="exploration">
-                <div class="image"><img src="dell 7420.jpg" alt="dell-pc"></div>
-                <div class="titre">
-                    <h3>Samsung Galaxy Book2 (NP750XED-KB8FR)</h3>
-                </div>
-                <div class="description">
-                    <p>Intel Core i5-1235U 8 Go SSD 256 Go 15.6" Full HD Wi-Fi 6E/Bluetooth Webcam Windows 11 Professionnel</p>
-                </div>
-                <div class="box">
-                    <div class="prix">
-                        <h1>105000.00 DA</h1>
-                    </div>
-                    <div class="boutton"><a href="#"><button>Details</button></a></div>
-                </div>
-            </div>
+  </div>
 
+  <!-- ── Meilleures ventes ───────────────── -->
+  <div class="section-title">
+    <span>Meilleures ventes</span>
+  </div>
 
-            <div class="carte" id="exploration">
-                <div class="image"><img src="hp.jpg" alt="HP"></div>
-                <div class="titre">
-                    <h3>HP EliteBook 840 G5 (3JX29EA)</h3>
-                </div>
-                <div class="description">
-                    <p>i5-8250U, SSD M.2 PCIe de 512 Go, Windows 10 Professionnel 64 bits,14" anti-reflets Full HD (1920
-                        x 1080)</p>
-                </div>
-                <div class="box">
-                    <div class="prix">
-                        <h1>97400.00 DA</h1>
-                    </div>
-                    <div class="boutton"><a href="#"><button>Details</button></a></div>
-                </div>
-            </div>
+  <div class="product-grid">
 
+    <div class="carte">
+      <div class="image"><img src="dell 7420.jpg" alt="Samsung Galaxy Book2"></div>
+      <div class="titre"><h3>Samsung Galaxy Book2 (NP750XED-KB8FR)</h3></div>
+      <div class="description">
+        <p>Intel Core i5-1235U, 8 Go, SSD 256 Go, 15.6" Full HD, Wi-Fi 6E / Bluetooth, Webcam, Windows 11 Professionnel</p>
+      </div>
+      <div class="box">
+        <div class="prix"><p class="single">105 000 DA</p></div>
+        <div class="boutton"><a href="#"><button>Détails</button></a></div>
+      </div>
+    </div>
 
-            <div class="carte" id="exploration">
-                <div class="image"><img src="msi katana.jpg" alt="MSI-pc"></div>
-                <div class="titre">
-                    <h3>ACER Predator Triton 500 SE PT516-52s-718U</h3>
-                </div>
-                <div class="description">
-                    <p>i7-12650H 16 Go SSD 512 Go 17.3" LED Full HD 144 Hz NVIDIA RTX 3060 6 Go 6/Bluetooth Webcam
-                        Windows 11 Famille</p>
-                </div>
-                <div class="box">
-                    <div class="prix">
-                        <h1>89000.00 DA</h1>
-                    </div>
-                    <div class="boutton"><a href="#"><button>Details</button></a></div>
+    <div class="carte">
+      <div class="image"><img src="hp.jpg" alt="HP EliteBook 840 G5"></div>
+      <div class="titre"><h3>HP EliteBook 840 G5 (3JX29EA)</h3></div>
+      <div class="description">
+        <p>i5-8250U, SSD M.2 PCIe 512 Go, Windows 10 Pro 64 bits, 14" anti-reflets Full HD (1920 × 1080)</p>
+      </div>
+      <div class="box">
+        <div class="prix"><p class="single">97 400 DA</p></div>
+        <div class="boutton"><a href="#"><button>Détails</button></a></div>
+      </div>
+    </div>
 
-                </div>
-            </div>
+    <div class="carte">
+      <div class="image"><img src="msi katana.jpg" alt="ACER Predator Triton 500 SE"></div>
+      <div class="titre"><h3>ACER Predator Triton 500 SE PT516-52s-718U</h3></div>
+      <div class="description">
+        <p>i7-12650H, 16 Go, SSD 512 Go, 17.3" LED FHD 144 Hz, NVIDIA RTX 3060 6 Go, Bluetooth, Webcam, Windows 11</p>
+      </div>
+      <div class="box">
+        <div class="prix"><p class="single">89 000 DA</p></div>
+        <div class="boutton"><a href="#"><button>Détails</button></a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Valeurs ─────────────────────────── -->
+  <section class="last">
+
+    <div class="first">
+      <img src="handshake.png" alt="Confiance">
+      <div class="box">
+        <div class="titre"><h1>Confiance</h1></div>
+        <div class="disc">
+          <p>Nous accordons une grande importance à la confiance de nos clients. Votre vie privée est notre priorité,
+            et nous nous engageons à protéger vos informations personnelles. Votre satisfaction est garantie à 100 % :
+            remboursement intégral ou remplacement si vous n'êtes pas entièrement satisfait.</p>
         </div>
+      </div>
+    </div>
 
-
-    </section>
-    <section class="last">
-
-        <div class="first">
-            <img src="handshake.png">
-            <div class="box">
-                <div class="titre">
-                    <h1>CONFIANCE</h1>
-                </div>
-                <div class="disc">
-                    <p>"Nous accordons une grande importance à la confiance de nos clients. Votre vie privée est notre
-                        priorité, et nous nous engageons à protéger vos informations personnelles en respectant les
-                        normes de confidentialité les plus strictes, Votre satisfaction est notre objectif principal.
-                        Nous offrons une garantie de satisfaction à 100 %, ce qui signifie que si vous n'êtes pas
-                        entièrement satisfait de votre achat, nous nous engageons à vous rembourser intégralement ou à
-                        vous proposer un remplacement."</p>
-                </div>
-            </div>
-
+    <div class="second">
+      <img src="chronometer.png" alt="Rapidité">
+      <div class="box">
+        <div class="titre"><h1>Rapidité</h1></div>
+        <div class="disc">
+          <p>Nous comprenons que votre temps est précieux. Vos commandes sont expédiées le plus rapidement possible.
+            Notre service client est réputé pour sa réactivité — nous répondons à toutes vos questions dans les
+            meilleurs délais.</p>
         </div>
+      </div>
+    </div>
 
-        <div class="second">
-            <img src="chronometer.png">
-            <div class="box">
-                <div class="titre">
-                    <h1>RAPIDITE</h1>
-                </div>
-                <div class="disc">
-                    <p>"Nous comprenons que votre temps est précieux. C'est pourquoi nous nous engageons à expédier
-                        votre commande le plus rapidement possible, afin que vous puissiez profiter de votre nouvel
-                        ordinateur portable sans attendre, Notre service client est réputé pour sa réactivité. Nous
-                        sommes disponibles pour répondre à toutes vos questions et préoccupations, et nous nous
-                        efforçons de vous fournir des réponses rapides et utiles."</p>
-                </div>
-            </div>
+    <div class="third">
+      <img src="badge.png" alt="Qualité">
+      <div class="box">
+        <div class="titre"><h1>Qualité</h1></div>
+        <div class="disc">
+          <p>Nous sélectionnons soigneusement nos produits parmi les marques les plus fiables du marché. Des
+            descriptions détaillées et des spécifications techniques complètes vous permettent de faire un choix
+            éclairé.</p>
         </div>
+      </div>
+    </div>
 
-        <div class="third">
-            <img src="badge.png">
-            <div class="box">
-                <div class="titre">
-                    <h1>QUALITE</h1>
-                </div>
-                <div class="disc">
-                    <p>"Nous sélectionnons soigneusement nos produits parmi les marques les plus fiables et réputées du
-                        marché. Nous ne proposons que des laptops de haute qualité pour garantir une expérience optimale
-                        à nos clients,
-                        Nos descriptions détaillées vous fournissent toutes les informations nécessaires pour prendre
-                        une décision éclairée. Des spécifications techniques aux fonctionnalités clés, vous saurez tout
-                        sur le laptop que vous choisissez."</p>
-                </div>
-            </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────── -->
+  <footer>
+    <div class="typepai">
+      <div class="livraison">
+        <h3>Livraison express</h3>
+        <div class="camion"><img src="camion.png" alt="Livraison par camion"></div>
+      </div>
+      <div class="pay">
+        <h2>Réglez avec :</h2>
+        <div class="box">
+          <img src="AlgeriePoste.svg.png" alt="Algérie Poste">
+          <img src="MasterCard_Logo.svg.png" alt="MasterCard">
+          <img src="Old_Visa_Logo.svg.png" alt="Visa">
         </div>
+      </div>
+      <div class="reseau">
+        <a href="#" aria-label="Facebook"><img src="icone fb black.png" alt="Facebook"></a>
+        <a href="#" aria-label="WhatsApp"><img src="whattapps.png" alt="WhatsApp"></a>
+        <a href="#" aria-label="Email"><img src="mail.png" alt="Email"></a>
+        <a href="#" aria-label="LinkedIn"><img src="linkd in.png" alt="LinkedIn"></a>
+      </div>
+    </div>
 
-    </section>
+    <div class="marque">
+      <div class="mark">
+        <img src="lenovo.png" alt="Lenovo">
+        <img src="appel.png" alt="Apple">
+        <img src="hplogo.jpeg" alt="HP">
+        <img src="MSI-Logo.png" alt="MSI">
+        <img src="dell logo.png" alt="Dell">
+        <img src="logo-asus-png-7169.png" alt="ASUS">
+      </div>
+    </div>
 
-    <footer>
-        <div class="typepai">
-            <div class="livraison">
-                <h3>LIVRAISON EXPRESS</h3>
-                <div class="camion">
-                    <img src="camion.png" alt="camion">
-                </div>
-            </div>
-            <div class="pay">
-                <h2>reglez avec :</h2>
-                <div class="box">
-                    <img src="AlgeriePoste.svg.png" alt="AlgeriePoste">
-                    <img src="MasterCard_Logo.svg.png" alt="MasterCard_Logo">
-                    <img src="Old_Visa_Logo.svg.png" alt="Old_Visa_Logo">
-                </div>
-            </div>
-            <div class="reseau">
-                <a href=""><img src="/icone fb black.png" alt="fb"></a>
-                <a href=""><img src="whattapps.png "alt=whattapps"></a>
-                <a href=""><img src="mail.png" alt="mail"></a>
-                <a href=""><img src="linkd in.png" alt="linkd"></a>
-            </div>
-        </div>
-        <div class="marque">
+    <div class="info">
+      <div class="participents">
+        <h1>Les participants :</h1>
+        <ul>
+          <li><a href="mailto:yidhirhammas1650@gmail.com">HAMMAS Yidhir</a></li>
+          <li><a href="mailto:anisgadi01@gmail.com">GADI Anis</a></li>
+          <li><a href="mailto:">DIDANE Ishak</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 
-            <div class="mark">
-                <img src="lenovo.png" alt="lenovo logo">
-                <img src="appel.png" alt="appel logo">
-                <img src="hplogo.jpeg" alt="gigabyte logo-asus-png-7169">
-                <img src="MSI-Logo.png" alt="MSI-Logo">
-                <img src="dell logo.png" alt="dell-pc">
-                <img src="logo-asus-png-7169.png" alt="logo-asus-png-7169">
-
-            </div>
-        </div>
-        <div class="info">
-            <div class="participents">
-                <h1>les participents :</h1>
-                <ul>
-                    <li><a href="mailto:yidhirhammas1650@gmail.com">HAMMAS yidhir</a></li>
-                    <li><a href="mailto:anisgadi01@gmail.com">GADI anis</a></li>
-                    <li><a href="mailto:">DIDANE ishak</a></li>
-                </ul>
-            </div>
-           
-        </div>
-    </footer>
 </body>
-
 </html>
